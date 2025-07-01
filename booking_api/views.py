@@ -3,7 +3,7 @@ from django.utils import timezone
 
 from rest_framework import status, generics
 from rest_framework.views import APIView
-from rest_framework.permissions import IsAdminUser
+from rest_framework.permissions import IsAdminUser, AllowAny
 from rest_framework.response import Response
 
 from .models import Classes, Booking
@@ -20,6 +20,7 @@ logger = logging.getLogger('booking_api')
 class ClassListView(generics.ListAPIView):
     """ Return list of all the upcoming classes [GET /classes] """
     serializer_class = ClassesSerializer
+    permission_classes = [AllowAny]  # Allow any user to view classes
 
     def get_queryset(self):
         queryset = Classes.objects.filter(date_time__gt=timezone.now())

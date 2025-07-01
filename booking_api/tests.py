@@ -141,7 +141,7 @@ class ClassesTestCase(FitnessAPITestCase):
         
         response = self.client.get(url)
         
-        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
     
     def test_list_classes_filter_by_type(self):
         """Test filtering classes by type"""
@@ -656,9 +656,8 @@ class PermissionTestCase(FitnessAPITestCase):
     """Test permission enforcement across all endpoints"""
     
     def test_all_endpoints_require_authentication(self):
-        """Test that all endpoints require authentication"""
+        """Test that all endpoints require authentication Except List Classes"""
         endpoints = [
-            ('class-list', 'get', {}),
             ('class-create', 'post', {}),
             ('booking-create', 'post', {}),
             ('booking-list', 'get', {}),
