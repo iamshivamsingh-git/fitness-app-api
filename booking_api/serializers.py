@@ -21,7 +21,7 @@ class ClassesSerializer(serializers.ModelSerializer):
         model = Classes
         fields = [
             "id", "name", "class_type", "date_time", "instructor",
-            "total_slots", "available_slots", 'duration_minutes',
+            "total_slots", 'duration_minutes', "available_slots", 
             'is_available', 'created_at', 'updated_at'
         ]
         read_only_fields = [

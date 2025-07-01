@@ -41,6 +41,11 @@ It uses JWT authenticatoin, enforces role-based access control, and include robu
     - Password: admin 
     - Use this panel to view, edit and manage all models in the system.
 
+9. Visit:
+    - Swagger UI : http://localhost:8000/swagger/
+    - ReDoc UI : http://localhost:8000/redoc/
+    - Raw JSON : http://localhost:8000/swagger.json/
+
 ## Models
 
 1. **Classes** : Represent a scheduled fitness session.
