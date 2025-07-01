@@ -8,7 +8,7 @@ This project is a Fitness Class Booking API built with Django + Django REST fram
 1. Browse and book fitness classes
 2. Cancel Booking
 3. View Personal Statistics
-   - ADMIN's can:
+- ADMIN's can:
 4. Create, update, delete fitness classes
 5. View platform-wide booking statistics
 
