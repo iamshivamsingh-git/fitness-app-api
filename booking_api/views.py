@@ -6,7 +6,7 @@ from rest_framework.views import APIView
 from rest_framework.permissions import IsAdminUser, AllowAny
 from rest_framework.response import Response
 
-from .models import Classes, Booking
+from .models import Classes, Booking, User
 from .serializers import UserSerializer, ClassesSerializer, BookingSerializer
 from .permissions import IsAdminOrOwner
 
@@ -16,6 +16,16 @@ from datetime import date as date_class
 import logging
 
 logger = logging.getLogger('booking_api')
+
+class UserCreateView(generics.CreateAPIView):
+    """ Create new User [POST /auth/register/ ]"""
+    serializer_class = UserSerializer
+    queryset = User.objects.all()
+    permission_classes = [AllowAny]  # Allow any user to register   
+
+    def perform_create(self, serializer):
+        logger.info(f"New user registration: {serializer.validated_data['username']}")
+        return super().perform_create(serializer)
 
 class ClassListView(generics.ListAPIView):
     """ Return list of all the upcoming classes [GET /classes] """

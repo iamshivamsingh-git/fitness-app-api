@@ -5,14 +5,20 @@
 
 This project is a Fitness Class Booking API built with Django + Django REST framework. It allows user to
 
-1. Browse and book fitness classes
-2. Cancel Booking
+1. Register and authenticate users
+   - Users can register with a username and password.
+   - Passwords are hashed and stored securely.
+   - JWT tokens are used for authentication.
+2. Browse and register for fitness classes
+   - Users can filter classes by type and date.
+   - Each class has a fixed number of slots, which can be booked by users. 
+   - Booking is restricted to one class per user at a time.
 3. View Personal Statistics
-   - ADMIN's can:
-4. Create, update, delete fitness classes
-5. View platform-wide booking statistics
+   - Users can view their booking history and upcoming classes.
+   - Admins can view all bookings and manage them.
+4. Classes can be created, updated, or deleted by admins.
 
-It uses JWT authenticatoin, enforces role-based access control, and include robust test coverage.
+It uses JWT authentication, enforces role-based access control, and includes robust test coverage.
 
 ## Setup Instructions:
 
@@ -96,6 +102,11 @@ It uses JWT authenticatoin, enforces role-based access control, and include robu
   - Decreasing available_slots on booking.
 - Uses **transaction.atomic()** to prevent race condition.
 
+3. **UserSerializer**
+- Handles user registration with password validation.
+- Password is write-only and must be at least 8 characters.
+- Automatically hashes password before saving.
+
 ## Views
 
 1. **Class Management**
@@ -134,10 +145,18 @@ It uses JWT authenticatoin, enforces role-based access control, and include robu
     - Cancelled booking
     - Count and details of upcomming bookings
 
+4. **User Registration and Authentication**
+
+- **UserCreateView**: Allows new users to register.
+- **TokenObtainPairView**: Provides JWT token for user authentication.
+- **TokenRefreshView**: Refreshes JWT token for authenticated users.
+
+
 ## API Endpoints:
 
 ### Authentication:
 
+- **POST** /api/auth/register/ - Register new user
 - **POST** /api/auth/login/ - Get JWT token
 - **POST** /api/auth/refresh/ - Refresh JWT token
 
@@ -300,6 +319,7 @@ Response:
 ## Features Implemented:
 
     ✅ JWT Authentication with refresh tokens
+    ✅ User registration with email verification
     ✅ Timezone management via request headers
     ✅ Admin CRUD operations for classes
     ✅ User booking with comprehensive validation

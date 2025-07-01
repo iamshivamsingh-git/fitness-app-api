@@ -86,6 +86,23 @@ class FitnessAPITestCase(APITestCase):
 class AuthenticationTestCase(FitnessAPITestCase):
     """Test authentication endpoints"""
 
+    def test_user_registration(self):
+        """Test user registration endpoint"""
+        url = reverse('user-create')
+        data = {
+            'username': 'newuser',
+            'email': 'newuser@test.com',
+            'first_name': 'New',
+            'last_name': 'User',
+            'password': 'newuserpass123',
+        }
+        response = self.client.post(url, data, format='json')
+
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertIn('id', response.data)
+        self.assertIn('username', response.data)
+            
+
     def test_login_valid_credentials(self):
         """Test login with valid credentials"""
         url = reverse('token_obtain_pair')
