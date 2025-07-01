@@ -13,6 +13,7 @@ This project is a Fitness Class Booking API built with Django + Django REST fram
    - Users can filter classes by type and date.
    - Each class has a fixed number of slots, which can be booked by users. 
    - Booking is restricted to one class per user at a time.
+   - User can cancel their booking as per their need.
 3. View Personal Statistics
    - Users can view their booking history and upcoming classes.
    - Admins can view all bookings and manage them.
